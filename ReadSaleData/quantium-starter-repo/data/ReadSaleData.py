@@ -6,6 +6,8 @@ files_processed = 0
 
 with open(output_file, mode='w', newline='') as output_csv:
     csv_writer = csv.writer(output_csv)
+    # add a csv header
+    header = ["sales", "date", "region"]
 
     for file in file_names:
         with open(file) as csv_file:
@@ -14,7 +16,7 @@ with open(output_file, mode='w', newline='') as output_csv:
             for row in csv_reader:
                 if line_count == 0:
                     print(f'Column names are {", ".join(row)}')
-                    #csv_writer.writerow("Product, sales, data, region")
+                    csv_writer.writerow(header)
                     line_count += 1
                 elif row[0].lower() == 'pink morsel'.lower():
                     total_value = float(row[1].replace('$', '')) * int(row[2])
